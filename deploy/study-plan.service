@@ -1,0 +1,15 @@
+[Unit]
+Description=Study Plan App (Flask + Gunicorn)
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/study-plan-app
+EnvironmentFile=/var/www/study-plan-app/.env
+ExecStart=/var/www/study-plan-app/venv/bin/gunicorn app:app --bind 127.0.0.1:8000 --workers 2 --timeout 120
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

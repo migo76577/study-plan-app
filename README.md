@@ -61,7 +61,23 @@ Open http://localhost:5173
 
 **Default mentor key (local only):** `mentor123` — change before deploying!
 
-## Deploy on Render
+## Deploy on DigitalOcean Droplet (recommended)
+
+Full guide: **[deploy/DEPLOY_DIGITALOCEAN.md](deploy/DEPLOY_DIGITALOCEAN.md)**
+
+Quick start on a fresh Ubuntu droplet:
+
+```bash
+ssh root@YOUR_DROPLET_IP
+git clone https://github.com/migo76577/study-plan-app.git /var/www/study-plan-app
+cd /var/www/study-plan-app && bash deploy/setup-droplet.sh
+nano /var/www/study-plan-app/.env   # set MENTOR_KEY
+systemctl restart study-plan
+```
+
+Updates after `git push`: `bash /var/www/study-plan-app/deploy/deploy.sh`
+
+## Deploy on Render (alternative)
 
 1. Push this repo to GitHub (first commit — see checklist below)
 2. In [Render](https://render.com), create a **Blueprint** from your repo (`render.yaml` is included)
