@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: study-plan-app
+    runtime: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt && cd frontend && npm install && npm run build
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.0"
+      - key: NODE_VERSION
+        value: "20"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: MENTOR_KEY
+        sync: false
+      - key: DATABASE_PATH
+        value: /var/data/studyplan.db
+      - key: SESSION_COOKIE_SECURE
+        value: "true"
+    disk:
+      name: studyplan-data
+      mountPath: /var/data
+      sizeGB: 1
