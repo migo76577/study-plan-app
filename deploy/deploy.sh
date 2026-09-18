@@ -7,6 +7,9 @@ set -euo pipefail
 APP_DIR="/var/www/study-plan-app"
 cd "$APP_DIR"
 
+# Repo is owned by www-data; allow root to pull without "dubious ownership"
+git config --global --add safe.directory "$APP_DIR" 2>/dev/null || true
+
 echo "==> Pulling latest code..."
 git pull origin main
 
