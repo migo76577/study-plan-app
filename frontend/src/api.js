@@ -1,8 +1,12 @@
 export async function api(path, options = {}) {
+  const { headers: optionHeaders, ...rest } = options
   const res = await fetch(path, {
-    headers: { 'Content-Type': 'application/json', ...options.headers },
     credentials: 'same-origin',
-    ...options,
+    ...rest,
+    headers: {
+      'Content-Type': 'application/json',
+      ...optionHeaders,
+    },
   })
   const data = await res.json().catch(() => ({}))
   if (!res.ok) {
